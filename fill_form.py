@@ -63,13 +63,13 @@ def fill_form(pdf_path, output_pdf_path, field_data):
 
 
 if __name__ == "__main__":
-    pdf_path = "templates/sample_pdf.pdf"
+    pdf_path = "templates/1099_page_3.pdf"
     output_pdf_path = "outputs/output_filled_form.pdf"
 
     # Dictionary containing the field names and the corresponding data to fill
     field_data = {
         "Name": "John Doe",
-        "Address": "123 Main St.",
+        "topmostSubform[0].CopyB[0].LeftColumn[0].f2_2[0]": "123 \nMain St.\nhi",
         "Check Box1": "checked",  # Set to 'checked' or 'unchecked'
     }
 
