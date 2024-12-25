@@ -1,0 +1,16 @@
+name: formfiller
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      - pymupdf
+      - pillow
+      - opencv-python-headless
+  - pandas
+  - numpy
+  - jupyterlab # Optional, if you plan to use Jupyter notebooks for testing
+  - matplotlib # Optional, for visualizing if needed
+  - tqdm # Optional, for progress bars if needed
