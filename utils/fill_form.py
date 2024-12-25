@@ -1,13 +1,16 @@
 import os
-import fitz  # PyMuPDF
+import fitz
+
+from utils.extract_page import extract_and_preserve_pages  # PyMuPDF
 
 
-def fill_form(pdf_path, output_pdf_path, field_data):
+def fill_form(
+    pdf_path, output_pdf_path, field_data, new_doc: fitz.Document | None = None
+):
     # Ensure the output directory exists
     output_dir = os.path.dirname(output_pdf_path)
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)  # Create the output directory if it doesn't exist
-
     doc = fitz.open(pdf_path)
 
     # Loop through each page to find form fields
@@ -59,7 +62,11 @@ def fill_form(pdf_path, output_pdf_path, field_data):
                 field.update()
 
     # Save the modified PDF
-    doc.save(output_pdf_path)
+    if new_doc is None:
+        doc.save(output_pdf_path)
+    else:
+        # TODO broken
+        new_doc.insert_pdf(doc)
 
 
 if __name__ == "__main__":
