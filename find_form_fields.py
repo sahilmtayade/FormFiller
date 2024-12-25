@@ -26,5 +26,5 @@ def check_form_fields(pdf_path):
 
 
 if __name__ == "__main__":
-    pdf_path = "templates/sample_pdf.pdf"
+    pdf_path = "templates/1099_page_3.pdf"
     check_form_fields(pdf_path)

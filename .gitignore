@@ -1,6 +1,6 @@
 # input data is sensitive
-inputs/
-
+inputs/*
+!inputs/example_input.csv
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
