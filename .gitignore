@@ -1,6 +1,10 @@
 # input data is sensitive
 inputs/*
 !inputs/example_input.csv
+# output is also sensitive
+outputs/*
+!outpus/output_filled_form.pdf
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
