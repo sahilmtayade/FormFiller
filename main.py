@@ -1,3 +1,4 @@
+import argparse
 import csv
 import os
 import fitz
@@ -50,9 +51,28 @@ def main(input_csv_file: str, template_path: str, one_doc=False):
 
 
 if __name__ == "__main__":
-    input_csv_file = "inputs/Tax 1099 print options MISC.csv"
+    parser = argparse.ArgumentParser(
+        description="Process an input file from the inputs folder."
+    )
+    parser.add_argument(
+        "input_file",
+        type=str,
+        help="Name of the input file located in the 'inputs' folder.",
+    )
+    args = parser.parse_args()
+
+    # Join 'inputs' folder path with the provided file name
+    inputs_folder = "inputs"
+    input_file_path = os.path.join(inputs_folder, args.input_file)
+
+    # Check if the file exists
+    if not os.path.exists(input_file_path):
+        print(f"Error: File '{input_file_path}' does not exist.")
+        exit()
+
+    # input_csv_file = "inputs/Tax 1099 print options MISC.csv"
     # input_csv_file = "inputs/example_input.csv"
     template_path = "templates/1099_page_3.pdf"
     # flatten = True
     one_doc = True
-    main(input_csv_file=input_csv_file, template_path=template_path, one_doc=one_doc)
+    main(input_csv_file=input_file_path, template_path=template_path, one_doc=one_doc)

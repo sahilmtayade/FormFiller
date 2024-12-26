@@ -1,20 +1,25 @@
 # ImageFormMapper
 
-Load a scanned form and some sample data to position all the elements needed in mass printing filled forms.
+ImageFormMapper is a tool for mapping and filling out scanned forms using sample data. It allows you to position all the necessary elements for mass-printing filled forms.
 
-# How To Customize filled forms
+## How to Customize Filled Forms
 
-Use the find_form_fields.py script to find all the element names you need to fill out in the form.
-"""
+To identify the elements that need to be filled in the form, use the `find_form_fields.py` script. This script will list all the field names in your form.
+
+```bash
 python find_form_fields.py
-"""
+```
 
-# Simple use
+Simple Usage
 
-For the usecase this was made for, just need to install conda, activate environment, and run main.py with the correct csv input file as argument.
+For the primary use case, follow these steps:
 
-"""
+1. Install conda if you don’t already have it.
+2. Create and activate the environment specified in environment.yml.
+3. Run main.py with the path to your input CSV file as an argument.
+
+```bash
 conda env create -f environment.yml
 conda activate formfiller
 python main.py input_csv
-"""
+```
