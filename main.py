@@ -20,10 +20,13 @@ def read_csv(input_file: str) -> list[list]:
         return list(reader)
 
 
-def main(input_csv_file: str, template_path: str):
+def main(input_csv_file: str, template_path: str, one_doc=False):
     field_mappings = read_yml()
     csv_data = read_csv(input_file=input_csv_file)
-    big_doc = fitz.open()
+    if one_doc:
+        big_doc = fitz.open()
+    else:
+        big_doc = None
     for i, row in enumerate(csv_data):
         fm = {}
         for field, csvidx in field_mappings.items():
@@ -36,17 +39,20 @@ def main(input_csv_file: str, template_path: str):
             pdf_path=template_path,
             field_data=fm,
             output_pdf_path=output_path,
-            # new_doc=big_doc,
+            # flatten=flatten,
+            new_doc=big_doc,
         )
-    # big_output_path = "outputs/big/big.pdf"
-    # output_dir = os.path.dirname(big_output_path)
-    # if not os.path.exists(output_dir):
-    #     os.makedirs(output_dir)  # Create the output directory if it doesn't exist
-    # big_doc.save(big_output_path)
+    big_output_path = "outputs/big/big.pdf"
+    output_dir = os.path.dirname(big_output_path)
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)  # Create the output directory if it doesn't exist
+    big_doc.save(big_output_path)
 
 
 if __name__ == "__main__":
     input_csv_file = "inputs/Tax 1099 print options MISC.csv"
     # input_csv_file = "inputs/example_input.csv"
     template_path = "templates/1099_page_3.pdf"
-    main(input_csv_file=input_csv_file, template_path=template_path)
+    # flatten = True
+    one_doc = True
+    main(input_csv_file=input_csv_file, template_path=template_path, one_doc=one_doc)

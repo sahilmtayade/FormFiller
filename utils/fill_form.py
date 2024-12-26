@@ -65,8 +65,9 @@ def fill_form(
     if new_doc is None:
         doc.save(output_pdf_path)
     else:
-        # TODO broken
-        new_doc.insert_pdf(doc)
+        pdfbytes = doc.convert_to_pdf()
+        temp = fitz.open("pdf", pdfbytes)
+        new_doc.insert_pdf(temp)
 
 
 if __name__ == "__main__":
