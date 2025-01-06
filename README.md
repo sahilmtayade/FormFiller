@@ -1,6 +1,7 @@
 # ImageFormMapper
 
 ImageFormMapper is a tool for mapping and filling out scanned forms using sample data. It allows you to position all the necessary elements for mass-printing filled forms.
+This has been succesfully used for 1099 MISC and NEC form filling at enterprise scale.
 
 ## How to Customize Filled Forms
 
