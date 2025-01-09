@@ -89,7 +89,7 @@ if __name__ == "__main__":
         template_path = "templates/1099_page_3.pdf"
         output_big = "misc_big"
         mapping_path = "field_number_mapping.yml"
-    if args.template == "nec":
+    elif args.template == "nec":
         template_path = "templates/nec_page_3.pdf"
         output_big = "nec_big"
         mapping_path = "field_number_mapping_nec.yml"
