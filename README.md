@@ -18,7 +18,7 @@ For the primary use case, follow these steps:
 1. Install conda if you don’t already have it.
 2. Create and activate the environment specified in environment.yml.
 3. Run main.py with the path to your input CSV file as an argument.
-  a. You need to place your input csv in the inputs folder.
+- You need to place your input csv in the inputs folder.
 
 ```bash
 conda env create -f environment.yml
