@@ -46,6 +46,7 @@ def main(
                 except Exception as e:
                     print(f"Error {traceback.format_exc()}")
                     print(f"error row = {row}")
+                    exit()
 
         output_path = os.path.join("outputs", str(i) + ".pdf")
         fill_form(
