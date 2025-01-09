@@ -1,6 +1,7 @@
 # input data is sensitive
 inputs/*
-!inputs/example_input.csv
+!inputs/misc_example_input.csv
+!inputs/nec_example_input.csv
 # output is also sensitive
 outputs/*
 !outpus/output_filled_form.pdf
