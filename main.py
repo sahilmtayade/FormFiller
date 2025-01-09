@@ -28,6 +28,7 @@ def main(
     one_doc=False,
     output_big_file="big",
     fm_path=None,
+    skip_header=False,
 ):
     filled = 0
     field_mappings = read_yml(mapping_path=fm_path)
@@ -37,6 +38,8 @@ def main(
     else:
         big_doc = None
     for i, row in enumerate(csv_data):
+        if skip_header and i == 0:
+            continue
         if not row:
             continue
         fm = {}
@@ -87,6 +90,12 @@ if __name__ == "__main__":
         default="misc",
         help="Specify 'nec', 'misc', or a valid file path",
     )
+    parser.add_argument(
+        "--skip-header",
+        "-s",
+        action="store_true",
+        help="Set this flag to skip first line. Default is False.",
+    )
     args = parser.parse_args()
 
     # Join 'inputs' folder path with the provided file name
@@ -103,7 +112,7 @@ if __name__ == "__main__":
     if args.template == "misc":
         template_path = "templates/1099_page_3.pdf"
         output_big = "misc_big"
-        mapping_path = "field_number_mapping.yml"
+        mapping_path = "misc_field_number_mapping.yml"
     elif args.template == "nec":
         template_path = "templates/nec_template.pdf"
         output_big = "nec_big"
@@ -121,4 +130,5 @@ if __name__ == "__main__":
         one_doc=one_doc,
         output_big_file=output_big,
         fm_path=mapping_path,
+        skip_header=args.skip_header,
     )
