@@ -29,6 +29,7 @@ def main(
     output_big_file="big",
     fm_path=None,
 ):
+    filled = 0
     field_mappings = read_yml(mapping_path=fm_path)
     csv_data = read_csv(input_file=input_csv_file)
     if one_doc:
@@ -36,6 +37,8 @@ def main(
     else:
         big_doc = None
     for i, row in enumerate(csv_data):
+        if not row:
+            continue
         fm = {}
         for field, csvidx in field_mappings.items():
             if isinstance(csvidx, list):
@@ -43,9 +46,10 @@ def main(
             else:
                 try:
                     fm[field] = row[csvidx]
-                except Exception as e:
+                except Exception:
                     print(f"Error {traceback.format_exc()}")
-                    print(f"error row = {row}")
+                    print(f"Error row = {row}")
+                    print(f"{len(row)=}")
                     exit()
 
         output_path = os.path.join("outputs", str(i) + ".pdf")
@@ -56,6 +60,8 @@ def main(
             # flatten=flatten,
             new_doc=big_doc,
         )
+        filled += 1
+    print(f"Finished, filled {filled}")
     big_output_path = f"outputs/big/{output_big_file}.pdf"
     output_dir = os.path.dirname(big_output_path)
     if not os.path.exists(output_dir):
