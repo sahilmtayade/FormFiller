@@ -11,7 +11,7 @@ To identify the elements that need to be filled in the form, use the `find_form_
 python find_form_fields.py
 ```
 
-Simple Usage
+## Simple Usage
 
 For the primary use case, follow these steps:
 
