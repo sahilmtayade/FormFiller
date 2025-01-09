@@ -1,6 +1,7 @@
 import argparse
 import csv
 import os
+import traceback
 import fitz
 import yaml
 
@@ -40,7 +41,12 @@ def main(
             if isinstance(csvidx, list):
                 fm[field] = " \n".join([row[idx] for idx in csvidx])
             else:
-                fm[field] = row[csvidx]
+                try:
+                    fm[field] = row[csvidx]
+                except Exception as e:
+                    print(f"Error {traceback.format_exc()}")
+                    print(f"error row = {row}")
+
         output_path = os.path.join("outputs", str(i) + ".pdf")
         fill_form(
             pdf_path=template_path,
