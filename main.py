@@ -41,6 +41,8 @@ def main(
             continue
         fm = {}
         for field, csvidx in field_mappings.items():
+            if csvidx == "-1":
+                continue
             if isinstance(csvidx, list):
                 fm[field] = " \n".join([row[idx] for idx in csvidx])
             else:
@@ -103,9 +105,9 @@ if __name__ == "__main__":
         output_big = "misc_big"
         mapping_path = "field_number_mapping.yml"
     elif args.template == "nec":
-        template_path = "templates/nec_page_3.pdf"
+        template_path = "templates/nec_template.pdf"
         output_big = "nec_big"
-        mapping_path = "field_number_mapping_nec.yml"
+        mapping_path = "nec_fnm.yml"
     else:
         template_path = args.template
         output_big = "big"

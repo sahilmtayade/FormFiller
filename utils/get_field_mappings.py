@@ -1,14 +1,15 @@
 import fitz  # PyMuPDF
 import json
 
+import yaml
 
-def generate_field_number_mapping(input_pdf, output_json):
+
+def generate_field_number_mapping(input_pdf, output_yaml):
     # Open the PDF file
     doc = fitz.open(input_pdf)
 
     # Initialize the dictionary
     field_mapping = {}
-    field_number = 1
 
     # Iterate over all pages in the PDF
     for page_num in range(len(doc)):
@@ -22,18 +23,15 @@ def generate_field_number_mapping(input_pdf, output_json):
         for widget in widgets:
             field_name = widget.field_name  # Get the field name
             if field_name:
-                field_mapping[field_name] = field_number
-                field_number += 1
+                field_mapping[field_name] = -1
 
-    # Save the mapping to a JSON file
-    with open(output_json, "w") as json_file:
-        json.dump(field_mapping, json_file, indent=4)
+    # Save the mapping to a YAML file
+    with open(output_yaml, "w") as yaml_file:
+        yaml.dump(field_mapping, yaml_file, default_flow_style=False)
 
-    print(f"Field number mapping saved to {output_json}")
+    print(f"Field name mapping saved to {output_yaml}")
 
 
 # Example usage
 if __name__ == "__main__":
-    generate_field_number_mapping(
-        "templates/1099_page_3.pdf", "field_number_mapping.json"
-    )
+    generate_field_number_mapping("templates/nec_template.pdf", "nec_fnm.yml")

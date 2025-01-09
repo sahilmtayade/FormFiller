@@ -49,4 +49,4 @@ def overlay_field_names(input_pdf, output_pdf=None):
 
 if __name__ == "__main__":
     # Example usage: Overlay field names and save the modified PDF and JSON
-    overlay_field_names("templates/1099_page_3.pdf")
+    overlay_field_names("templates/nec_template.pdf")
