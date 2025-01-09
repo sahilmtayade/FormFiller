@@ -1,18 +1,18 @@
-State_Payers_state_no: -1
-State_Payers_state_no2: -1
-account_number: -1
-calender_year: -1
-corrected_box: -1
-direct_sales_box: -1
-federal_income_tax_withheld: -1
-nonemployee_compensation: -1
-payer: -1
-payer_tin: -1
-recipient_city_zip: -1
-recipient_name: -1
-recipient_street_address: -1
-recipient_tin: -1
-state_income: -1
+payer: [0, 1]
+calender_year: 3
+nonemployee_compensation: 4
+payer_tin: 5
+recipient_tin: 6
+recipient_name: 8
+recipient_street_address: [9, 10]
+recipient_city_zip: 12
+federal_income_tax_withheld: 11
+state_tax_withheld: 13
+state_income: 15
+account_number: 16
 state_income_2: -1
-state_tax_withheld: -1
 state_tax_withheld2: -1
+direct_sales_box: -1
+corrected_box: -1
+State_Payers_state_no2: -1
+State_Payers_state_no: -1
