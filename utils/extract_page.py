@@ -30,11 +30,11 @@ def extract_and_preserve_pages(
 # Example usage
 if __name__ == "__main__":
     # Open the original PDF file
-    input_doc = fitz.open("templates/full.pdf")
+    input_doc = fitz.open("templates/f1099nec.pdf")
     # Create a new PDF document
     target_doc = fitz.open()
 
     extract_and_preserve_pages(input_doc, 3, 3, target_doc=target_doc)
 
     # Save the new PDF containing the pages and their widgets
-    target_doc.save("templates/1099_page_3.pdf")
+    target_doc.save("templates/nec_template.pdf")

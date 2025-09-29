@@ -1,134 +1,115 @@
-import argparse
-import csv
-import os
-import traceback
-import fitz
-import yaml
+"""
+FormFiller - Fill PDF forms with data from CSV files.
 
-from utils.fill_form import fill_form
+Refactored main module using modular architecture with proper separation of concerns.
+"""
+
+import logging
+import sys
+from pathlib import Path
+
+from cli import CLI
+from config import FormFillerConfig
+from exceptions import FormFillerError
+from form_filler import FormFiller
 
 
-def read_yml(mapping_path="field_number_mapping.yml") -> dict:
-    with open(mapping_path, "r") as file:
-        data = yaml.safe_load(file)
-    return data
+def setup_logging(verbose: bool = False) -> None:
+    """
+    Set up logging configuration.
+
+    Args:
+        verbose: Whether to enable verbose logging
+    """
+    level = logging.DEBUG if verbose else logging.INFO
+    format_str = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+    logging.basicConfig(
+        level=level,
+        format=format_str,
+        handlers=[
+            logging.StreamHandler(sys.stdout),
+        ],
+    )
 
 
-def read_csv(input_file: str) -> list[list]:
-    with open(input_file, "r") as file:
-        reader = csv.reader(
-            file, quotechar='"', delimiter=",", quoting=csv.QUOTE_MINIMAL
+def main() -> int:
+    """
+    Main entry point for the FormFiller application.
+
+    Returns:
+        Exit code (0 for success, non-zero for failure)
+    """
+    cli = CLI()
+
+    try:
+        # Parse and validate command-line arguments
+        args = cli.parse_args()
+
+        # Setup logging
+        setup_logging(verbose=args.verbose)
+        logger = logging.getLogger(__name__)
+
+        logger.info("FormFiller application started")
+
+        # Validate arguments
+        cli.validate_args(args)
+
+        # Initialize FormFiller with configuration
+        config = FormFillerConfig(base_path=str(Path.cwd()))
+        form_filler = FormFiller(config=config)
+
+        # Validate template before processing
+        logger.info(f"Validating template: {args.template_config.name}")
+        validation_results = form_filler.validate_template(args.template_config)
+        logger.debug(f"Template validation results: {validation_results}")
+
+        # Process forms
+        logger.info(f"Processing forms from {args.input_file}")
+        results = form_filler.process_forms(
+            input_csv_path=args.input_file_path,
+            template_config=args.template_config,
+            skip_header=args.skip_header,
+            dry_run=args.dry_run,
+            generate_combined_pdf=True,
         )
-        return list(reader)
 
+        # Print results
+        print("\\nFormFiller completed successfully!")
+        print(f"Template used: {results['template_used']}")
+        print(f"Total rows processed: {results['total_rows']}")
+        print(f"Successful fills: {results['successful_fills']}")
 
-def main(
-    input_csv_file: str,
-    template_path: str,
-    one_doc=False,
-    output_big_file="big",
-    fm_path=None,
-    skip_header=False,
-):
-    filled = 0
-    field_mappings = read_yml(mapping_path=fm_path)
-    csv_data = read_csv(input_file=input_csv_file)
-    if one_doc:
-        big_doc = fitz.open()
-    else:
-        big_doc = None
-    for i, row in enumerate(csv_data):
-        if skip_header and i == 0:
-            continue
-        if not row:
-            continue
-        fm = {}
-        for field, csvidx in field_mappings.items():
-            if csvidx == "-1":
-                continue
-            if isinstance(csvidx, list):
-                fm[field] = " \n".join([row[idx] for idx in csvidx])
-            else:
-                try:
-                    fm[field] = row[csvidx]
-                except Exception:
-                    print(f"Error {traceback.format_exc()}")
-                    print(f"Error row = {row}")
-                    print(f"{len(row)=}")
-                    exit()
+        if results["failed_fills"] > 0:
+            print(f"Failed fills: {results['failed_fills']}")
 
-        output_path = os.path.join("outputs", str(i) + ".pdf")
-        fill_form(
-            pdf_path=template_path,
-            field_data=fm,
-            output_pdf_path=output_path,
-            # flatten=flatten,
-            new_doc=big_doc,
-        )
-        filled += 1
-    print(f"Finished, filled {filled}")
-    big_output_path = f"outputs/big/{output_big_file}.pdf"
-    output_dir = os.path.dirname(big_output_path)
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)  # Create the output directory if it doesn't exist
-    big_doc.save(big_output_path)
+        if "combined_pdf_path" in results:
+            print(f"Combined PDF saved to: {results['combined_pdf_path']}")
+
+        # Print mapping statistics
+        mapping_stats = results["mapping_summary"]
+        print("\\nMapping statistics:")
+        print(f"  Active fields: {mapping_stats['active_fields']}")
+        print(f"  Total fields: {mapping_stats['total_fields']}")
+        print(f"  Multi-column fields: {mapping_stats['multi_column_fields']}")
+
+        if args.dry_run:
+            print("\\n[DRY RUN] No actual PDF files were generated.")
+
+        logger.info("FormFiller application completed successfully")
+        return 0
+
+    except KeyboardInterrupt:
+        print("\\nOperation cancelled by user.")
+        return 130
+    except FormFillerError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
+    except Exception as e:
+        print(f"Unexpected error: {e}", file=sys.stderr)
+        logging.getLogger(__name__).exception("Unexpected error occurred")
+        return 2
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Process an input file from the inputs folder."
-    )
-    parser.add_argument(
-        "input_file",
-        type=str,
-        help="Name of the input file located in the 'inputs' folder.",
-    )
-    parser.add_argument(
-        "--template",
-        "-t",
-        type=str,
-        default="misc",
-        help="Specify 'nec', 'misc', or a valid file path",
-    )
-    parser.add_argument(
-        "--skip-header",
-        "-s",
-        action="store_true",
-        help="Set this flag to skip first line. Default is False.",
-    )
-    args = parser.parse_args()
-
-    # Join 'inputs' folder path with the provided file name
-    inputs_folder = "inputs"
-    input_file_path = os.path.join(inputs_folder, args.input_file)
-
-    # Check if the file exists
-    if not os.path.exists(input_file_path):
-        print(f"Error: File '{input_file_path}' does not exist.")
-        exit()
-
-    # input_csv_file = "inputs/Tax 1099 print options MISC.csv"
-    # input_csv_file = "inputs/example_input.csv"
-    if args.template == "misc":
-        template_path = "templates/1099_page_3.pdf"
-        output_big = "misc_big"
-        mapping_path = "misc_field_number_mapping.yml"
-    elif args.template == "nec":
-        template_path = "templates/nec_template.pdf"
-        output_big = "nec_big"
-        mapping_path = "nec_fnm.yml"
-    else:
-        template_path = args.template
-        output_big = "big"
-        mapping_path = "field_number_mapping_custom.yml"
-
-    # flatten = True
-    one_doc = True
-    main(
-        input_csv_file=input_file_path,
-        template_path=template_path,
-        one_doc=one_doc,
-        output_big_file=output_big,
-        fm_path=mapping_path,
-        skip_header=args.skip_header,
-    )
+    sys.exit(main())
