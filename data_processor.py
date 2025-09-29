@@ -123,7 +123,7 @@ class DataProcessor:
                                 f"Column index {idx} out of range for row {row_index} "
                                 f"(row length: {len(row)})"
                             )
-                    field_data[field_name] = " \\n".join(values)
+                    field_data[field_name] = " \n".join(values)
                 else:
                     # Single column mapped to field
                     if csv_index < len(row):

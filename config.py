@@ -27,7 +27,7 @@ class FormFillerConfig:
     BUILT_IN_TEMPLATES = {
         "misc": TemplateConfig(
             name="1099-MISC",
-            template_path="templates/1099_page_3.pdf",
+            template_path="templates/misc_template.pdf",
             mapping_path="misc_field_number_mapping.yml",
             output_prefix="misc_big",
         ),
@@ -70,15 +70,27 @@ class FormFillerConfig:
             available_files = [
                 f.name for f in self.inputs_folder.glob("*.csv") if f.is_file()
             ]
-            raise FileNotFoundError(
-                f"Input file '{input_path}' does not exist.\n"
-                f"Available files: {', '.join(available_files)}"
-            )
+            if not available_files:
+                raise FileNotFoundError(
+                    f"Input file '{input_path}' does not exist and no CSV files found in '{self.inputs_folder}'."
+                )
+            print(f"Input file '{input_path}' does not exist.")
+            print("Available CSV files:")
+            for idx, fname in enumerate(available_files, 1):
+                print(f"{idx}: {fname}")
+            choice = input("Select a file by number: ")
+            try:
+                selected_idx = int(choice) - 1
+                if selected_idx < 0 or selected_idx >= len(available_files):
+                    raise ValueError
+                input_path = self.inputs_folder / available_files[selected_idx]
+            except Exception:
+                raise FileNotFoundError("Invalid selection. Aborting.")
         return str(input_path)
 
     def get_output_path(self, filename: str) -> str:
         """Get full output path, creating directory if needed."""
-        output_path = self.outputs_folder / filename
+        output_path = self.outputs_folder / "individual" /  filename
         output_path.parent.mkdir(parents=True, exist_ok=True)
         return str(output_path)
 

@@ -1,0 +1,234 @@
+[
+    {
+        "field_name": "topmostSubform[0].CopyB[0].CopyHeader[0].CalendarYear[0].f2_1[0]",
+        "page": 0,
+        "coordinates": [
+            417.6000061035156,
+            96.0009765625
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].CopyHeader[0].c2_1[0]",
+        "page": 0,
+        "coordinates": [
+            244.8000030517578,
+            25.0
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].LeftColumn[0].f2_2[0]",
+        "page": 0,
+        "coordinates": [
+            52.400001525878906,
+            60.0
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].LeftColumn[0].f2_3[0]",
+        "page": 0,
+        "coordinates": [
+            50.400001525878906,
+            144.0009765625
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].LeftColumn[0].f2_4[0]",
+        "page": 0,
+        "coordinates": [
+            172.8000030517578,
+            144.0009765625
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].LeftColumn[0].f2_5[0]",
+        "page": 0,
+        "coordinates": [
+            52.400001525878906,
+            192.0
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].LeftColumn[0].f2_6[0]",
+        "page": 0,
+        "coordinates": [
+            52.400001525878906,
+            228.0
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].LeftColumn[0].f2_7[0]",
+        "page": 0,
+        "coordinates": [
+            52.400001525878906,
+            264.0
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].LeftColumn[0].f2_8[0]",
+        "page": 0,
+        "coordinates": [
+            50.400001525878906,
+            336.0
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].f2_9[0]",
+        "page": 0,
+        "coordinates": [
+            309.6000061035156,
+            60.0009765625
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].f2_10[0]",
+        "page": 0,
+        "coordinates": [
+            309.6000061035156,
+            96.0009765625
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].f2_11[0]",
+        "page": 0,
+        "coordinates": [
+            309.6000061035156,
+            119.9990234375
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].f2_12[0]",
+        "page": 0,
+        "coordinates": [
+            410.3999938964844,
+            119.9990234375
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].f2_13[0]",
+        "page": 0,
+        "coordinates": [
+            309.6000061035156,
+            168.0009765625
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].f2_14[0]",
+        "page": 0,
+        "coordinates": [
+            410.3999938964844,
+            168.0009765625
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].c2_4[0]",
+        "page": 0,
+        "coordinates": [
+            378.39898681640625,
+            206.0
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].f2_15[0]",
+        "page": 0,
+        "coordinates": [
+            410.3999938964844,
+            204.0009765625
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].f2_16[0]",
+        "page": 0,
+        "coordinates": [
+            309.6000061035156,
+            240.0009765625
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].f2_17[0]",
+        "page": 0,
+        "coordinates": [
+            410.3999938964844,
+            240.0009765625
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].f2_18[0]",
+        "page": 0,
+        "coordinates": [
+            309.6000061035156,
+            276.0009765625
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].f2_19[0]",
+        "page": 0,
+        "coordinates": [
+            410.3999938964844,
+            276.0009765625
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].TagCorrectingSubform[0].c2_3[0]",
+        "page": 0,
+        "coordinates": [
+            266.0,
+            310.0
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].RightColumn[0].f2_21[0]",
+        "page": 0,
+        "coordinates": [
+            410.3999938964844,
+            312.0010070800781
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].Box16_ReadOrder[0].f2_22[0]",
+        "page": 0,
+        "coordinates": [
+            309.6000061035156,
+            335.9989929199219
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].Box16_ReadOrder[0].f2_23[0]",
+        "page": 0,
+        "coordinates": [
+            309.6000061035156,
+            348.0010070800781
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].Box17_ReadOrder[0].f2_24[0]",
+        "page": 0,
+        "coordinates": [
+            396.0,
+            335.9989929199219
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].Box17_ReadOrder[0].f2_25[0]",
+        "page": 0,
+        "coordinates": [
+            396.0,
+            348.0010070800781
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].f2_26[0]",
+        "page": 0,
+        "coordinates": [
+            511.20001220703125,
+            335.9989929199219
+        ]
+    },
+    {
+        "field_name": "topmostSubform[0].CopyB[0].f2_27[0]",
+        "page": 0,
+        "coordinates": [
+            511.20001220703125,
+            348.0010070800781
+        ]
+    }
+]

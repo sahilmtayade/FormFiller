@@ -36,8 +36,8 @@ def rename_fields_with_mapping(
 
 # Usage
 rename_fields_with_mapping(
-    "templates/nec_page_3.pdf",
-    "utils/old_to_new_nec.yml",
     "templates/nec_template.pdf",
+    "utils/old_to_new_nec.yml",
+    "templates/nec_template1.pdf",
 )
 # rename_fields_with_mapping("nec_page_3.pdf", "old_to_new_nec.yaml", "nec_template.pdf")
